@@ -9,10 +9,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class User {
     @Id
@@ -37,36 +45,8 @@ public class User {
             columnDefinition = "TEXT"
     )
     private String profileImg;
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private boolean status = true;
-
-    public String getId() { return this.id; }
-
-    public String getPassword() { return this.password; }
-
-    public String getNickname() { return this.nickname; }
-
-    public String getEmail() { return this.email; }
-
-    public String getProfileImg() { return this.profileImg; }
-
-    public boolean getStatus() { return this.status; }
-
-    public void setId(String id) { this.id = id; }
-
-    public void setPassword(String password) { this.password = password; }
-
-    public void setNickname(String nickname) { this.nickname = nickname; }
-
-    public void setEmail(String email) { this.email = email; }
-
-    public void setProfileImg(String profileImg) { this.profileImg = profileImg; }
-
-    public void setStatus(boolean status) { this.status = status; }
-
-    public User() {}
 
     public User(String id, String password, String nickname, String email, String profileImg) {
         this.id = id;
@@ -74,14 +54,5 @@ public class User {
         this.nickname = nickname;
         this.email = email;
         this.profileImg = profileImg;
-    }
-
-    public User(String id, String password, String nickname, String email, String profileImg, boolean status) {
-        this.id = id;
-        this.password = password;
-        this.nickname = nickname;
-        this.email = email;
-        this.profileImg = profileImg;
-        this.status = status;
     }
 }
