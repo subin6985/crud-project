@@ -1,7 +1,6 @@
 package com.elice.boardproject.image.entity;
 
 import com.elice.boardproject.post.entity.Post;
-import com.elice.boardproject.global.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

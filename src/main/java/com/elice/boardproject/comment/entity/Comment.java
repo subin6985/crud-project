@@ -14,7 +14,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -44,13 +43,6 @@ public class Comment extends BaseEntity {
             columnDefinition = "TEXT"
     )
     private String content;
-    @CreatedDate
-    @Column(
-            nullable = false,
-            updatable = false,
-            columnDefinition = "TIMESTAMP"
-    )
-    private LocalDateTime createdAt;
 
     public Comment(Post post, User user, String content) {
         this.post = post;

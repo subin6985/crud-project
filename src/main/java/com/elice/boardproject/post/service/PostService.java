@@ -5,7 +5,10 @@ import com.elice.boardproject.board.service.BoardService;
 import com.elice.boardproject.global.exception.ExceptionCode;
 import com.elice.boardproject.global.exception.ServiceLogicException;
 import com.elice.boardproject.post.entity.Post;
+import com.elice.boardproject.post.entity.PostPostDto;
 import com.elice.boardproject.post.repository.PostRepository;
+
+import java.util.List;
 import java.util.Optional;
 
 import lombok.AllArgsConstructor;
@@ -13,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Transactional
