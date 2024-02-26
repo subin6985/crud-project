@@ -1,17 +1,12 @@
 package com.elice.boardproject.comment.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class CommentDto {
     private String content;
-
-    public String getContent() {
-        return this.content;
-    }
-
-    public void setContent(final String content) {
-        this.content = content;
-    }
-
-    public CommentDto(final String content) {
-        this.content = content;
-    }
 }

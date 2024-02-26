@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @NoArgsConstructor
 @Component
-public class UserMapperImp implements UserMapper {
+public class UserMapperImpl implements UserMapper {
     public User userDtoToUser(UserDto userDto) {
         if(userDto == null) {
             return null;

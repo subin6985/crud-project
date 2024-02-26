@@ -7,6 +7,8 @@ import com.elice.boardproject.board.service.BoardService;
 import com.elice.boardproject.post.entity.Post;
 import com.elice.boardproject.post.service.PostService;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -19,18 +21,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@AllArgsConstructor
 @Controller
 @RequestMapping({"/boards"})
 public class BoardController {
     private final BoardService boardService;
     private final PostService postService;
     private final BoardMapper boardMapper;
-
-    public BoardController(BoardService boardService, PostService postService, BoardMapper boardMapper) {
-        this.boardService = boardService;
-        this.postService = postService;
-        this.boardMapper = boardMapper;
-    }
 
     @GetMapping
     public String getBoards(Model model) {

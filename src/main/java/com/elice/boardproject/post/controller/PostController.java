@@ -8,6 +8,8 @@ import com.elice.boardproject.post.entity.PostPostDto;
 import com.elice.boardproject.post.mapper.PostMapper;
 import com.elice.boardproject.post.service.PostService;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@AllArgsConstructor
 @Controller
 @RequestMapping({"/posts"})
 public class PostController {
@@ -70,12 +73,5 @@ public class PostController {
         this.postService.deletePost(postId);
         redirectAttributes.addFlashAttribute("message", "과목이 제거되었습니다.");
         return "redirect:/posts";
-    }
-
-    public PostController(final PostService postService, final BoardService boardService, final PostMapper postMapper, final CommentService commentService) {
-        this.postService = postService;
-        this.boardService = boardService;
-        this.postMapper = postMapper;
-        this.commentService = commentService;
     }
 }

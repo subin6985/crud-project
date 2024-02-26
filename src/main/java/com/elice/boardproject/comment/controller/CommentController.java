@@ -4,6 +4,7 @@ import com.elice.boardproject.comment.entity.Comment;
 import com.elice.boardproject.comment.entity.CommentDto;
 import com.elice.boardproject.comment.mapper.CommentMapper;
 import com.elice.boardproject.comment.service.CommentService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@AllArgsConstructor
 @Controller
 @RequestMapping({"/comments"})
 public class CommentController {
@@ -39,10 +41,5 @@ public class CommentController {
     public String deleteComment(@PathVariable Long commentId) {
         this.commentService.deleteComment(commentId);
         return "redirect:/posts";
-    }
-
-    public CommentController(final CommentService commentService, final CommentMapper commentMapper) {
-        this.commentService = commentService;
-        this.commentMapper = commentMapper;
     }
 }

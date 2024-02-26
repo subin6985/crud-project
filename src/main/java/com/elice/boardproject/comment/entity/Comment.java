@@ -2,6 +2,7 @@ package com.elice.boardproject.comment.entity;
 
 import com.elice.boardproject.global.entity.BaseEntity;
 import com.elice.boardproject.post.entity.Post;
+import com.elice.boardproject.user.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,16 +10,22 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Comment extends BaseEntity {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(
@@ -26,6 +33,12 @@ public class Comment extends BaseEntity {
             nullable = false
     )
     private Post post;
+    @ManyToOne
+    @JoinColumn(
+            name = "user_id",
+            nullable = false
+    )
+    private User user;
     @Column(
             nullable = false,
             columnDefinition = "TEXT"
@@ -39,37 +52,9 @@ public class Comment extends BaseEntity {
     )
     private LocalDateTime createdAt;
 
-    public Comment(Post post, String content) {
+    public Comment(Post post, User user, String content) {
         this.post = post;
+        this.user = user;
         this.content = content;
-    }
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public Post getPost() {
-        return this.post;
-    }
-
-    public String getContent() {
-        return this.content;
-    }
-
-    public LocalDateTime getCreatedAt() { return this.createdAt; }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public void setPost(final Post post) {
-        this.post = post;
-    }
-
-    public void setContent(final String content) {
-        this.content = content;
-    }
-
-    public Comment() {
     }
 }

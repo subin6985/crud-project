@@ -2,13 +2,12 @@ package com.elice.boardproject.board.mapper;
 
 import com.elice.boardproject.board.entity.Board;
 import com.elice.boardproject.board.entity.BoardPostDto;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+@NoArgsConstructor
 @Component
-public class BoardMapperImp implements BoardMapper {
-    public BoardMapperImp() {
-    }
-
+public class BoardMapperImpl implements BoardMapper {
     public Board boardPostDtoToBoard(BoardPostDto boardPostDto) {
         if (boardPostDto == null) {
             return null;

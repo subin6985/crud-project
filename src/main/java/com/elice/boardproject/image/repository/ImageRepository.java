@@ -1,6 +1,5 @@
 package com.elice.boardproject.image.repository;
 
-import com.elice.boardproject.comment.entity.Comment;
 import com.elice.boardproject.image.entity.Image;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

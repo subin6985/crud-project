@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @NoArgsConstructor
 @Component
-public class ImageMapperImp implements ImageMapper {
+public class ImageMapperImpl implements ImageMapper {
     public Image imageDtoToImage(ImageDto imageDto) {
         if (imageDto == null) {
             return null;

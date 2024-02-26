@@ -7,6 +7,8 @@ import com.elice.boardproject.global.exception.ServiceLogicException;
 import com.elice.boardproject.post.entity.Post;
 import com.elice.boardproject.post.repository.PostRepository;
 import java.util.Optional;
+
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -14,14 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
     private final BoardService boardService;
-
-    public PostService(PostRepository postRepository, BoardService boardService) {
-        this.boardService = boardService;
-        this.postRepository = postRepository;
-    }
 
     public Page<Post> findPostsByBoardAndKeyword(Board board, String keyword, PageRequest pageRequest) {
         return keyword != null && !keyword.isEmpty() ? this.postRepository.findAllByBoardAndTitleContaining(board, keyword, pageRequest) : this.postRepository.findAllByBoardOrderByCreatedAtDesc(board, pageRequest);

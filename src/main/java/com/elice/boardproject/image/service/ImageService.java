@@ -1,7 +1,5 @@
 package com.elice.boardproject.image.service;
 
-import com.elice.boardproject.comment.entity.Comment;
-import com.elice.boardproject.comment.service.CommentService;
 import com.elice.boardproject.image.entity.Image;
 import com.elice.boardproject.image.repository.ImageRepository;
 import com.elice.boardproject.global.exception.ExceptionCode;
@@ -51,7 +49,7 @@ public class ImageService {
 
     public Image updateImage(Long imageId, Image image) {
         image.setId(imageId);
-        Image foundImage = (Image)this.imageRepository.findById(image.getId()).orElse();
+        Image foundImage = (Image)this.imageRepository.findById(image.getId()).orElse(null);
         Optional.ofNullable(image.isThumbnail()).ifPresent((thumbnail) -> {
             foundImage.setThumbnail(thumbnail);
         });

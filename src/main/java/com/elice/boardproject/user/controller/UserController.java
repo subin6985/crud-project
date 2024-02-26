@@ -4,6 +4,7 @@ import com.elice.boardproject.user.entity.User;
 import com.elice.boardproject.user.entity.UserDto;
 import com.elice.boardproject.user.mapper.UserMapper;
 import com.elice.boardproject.user.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+@AllArgsConstructor
 @Controller
 public class UserController {
     private final UserService userService;
@@ -58,10 +60,5 @@ public class UserController {
         this.userService.deleteUser(userId);
         redirectAttributes.addFlashAttribute("message", "과목이 제거되었습니다.");
         return "/posts";
-    }
-
-    public UserController(UserService userService, UserMapper userMapper) {
-        this.userService = userService;
-        this.userMapper = userMapper;
     }
 }
