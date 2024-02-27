@@ -30,10 +30,7 @@ public class Post extends BaseEntity {
     )
     private Board board;
     @ManyToOne
-    @JoinColumn(
-            name = "user_id",
-            nullable = false
-    )
+    @JoinColumn(name = "user_id")
     private User user;
     @OneToMany(mappedBy = "post")
     private List<Image> images = new ArrayList<>();
@@ -54,4 +51,21 @@ public class Post extends BaseEntity {
             columnDefinition = "TEXT"
     )
     private String content;
+
+    public Post(Board board, String title, String seat, int score, String content) {
+        this.board = board;
+        this.title = title;
+        this.seat = seat;
+        this.score = score;
+        this.content = content;
+    }
+
+    public Post(Board board, User user, String title, String seat, int score, String content) {
+        this.board = board;
+        this.user = user;
+        this.title = title;
+        this.seat = seat;
+        this.score = score;
+        this.content = content;
+    }
 }

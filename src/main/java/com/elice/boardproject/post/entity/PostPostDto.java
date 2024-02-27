@@ -12,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class PostPostDto {
-    private Long id;
     private String title;
     private String seat;
     private int score;

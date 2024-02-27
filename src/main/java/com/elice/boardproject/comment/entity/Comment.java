@@ -33,16 +33,18 @@ public class Comment extends BaseEntity {
     )
     private Post post;
     @ManyToOne
-    @JoinColumn(
-            name = "user_id",
-            nullable = false
-    )
+    @JoinColumn(name = "user_id")
     private User user;
     @Column(
             nullable = false,
             columnDefinition = "TEXT"
     )
     private String content;
+
+    public Comment(Post post, String content) {
+        this.post = post;
+        this.content = content;
+    }
 
     public Comment(Post post, User user, String content) {
         this.post = post;

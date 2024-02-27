@@ -22,9 +22,7 @@ public class BoardService {
     }
 
     public Board findBoardById(Long id) {
-        return (Board)this.boardRepository.findById(id).orElseThrow(() -> {
-            return new ServiceLogicException(ExceptionCode.BOARD_NOT_FOUND);
-        });
+        return this.boardRepository.findById(id).orElseThrow(() -> new ServiceLogicException(ExceptionCode.BOARD_NOT_FOUND));
     }
 
     public Board createBoard(Board board) {
@@ -32,9 +30,7 @@ public class BoardService {
     }
 
     public Board updateBoard(Board board) {
-        this.foundBoard = (Board)this.boardRepository.findById(board.getId()).orElseThrow(() -> {
-            return new ServiceLogicException(ExceptionCode.BOARD_NOT_FOUND);
-        });
+        this.foundBoard = this.boardRepository.findById(board.getId()).orElseThrow(() -> new ServiceLogicException(ExceptionCode.BOARD_NOT_FOUND));
         Optional.ofNullable(board.getName()).ifPresent((name) -> {
             this.foundBoard = this.foundBoard.toBuilder().name(name).build();
         });
@@ -43,9 +39,7 @@ public class BoardService {
     }
 
     public void deleteBoard(Long id) {
-        this.foundBoard = (Board)this.boardRepository.findById(id).orElseThrow(() -> {
-            return new ServiceLogicException(ExceptionCode.BOARD_NOT_FOUND);
-        });
+        this.foundBoard = this.boardRepository.findById(id).orElseThrow(() -> new ServiceLogicException(ExceptionCode.BOARD_NOT_FOUND));
         this.boardRepository.delete(this.foundBoard);
     }
 }

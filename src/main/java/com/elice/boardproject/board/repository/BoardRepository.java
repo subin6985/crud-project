@@ -59,12 +59,12 @@ public class BoardRepository {
 
     public Board update(Board board) {
         String updateSql = "UPDATE board SET name = ?, description = ? WHERE id = ?";
-        this.jdbcTemplate.update(updateSql, new Object[]{board.getName(), board.getDescription(), board.getId()});
+        this.jdbcTemplate.update(updateSql, board.getName(), board.getDescription(), board.getId());
         return board;
     }
 
     public void delete(Board board) {
         String sql = "DELETE FROM board WHERE id = ?";
-        this.jdbcTemplate.update(sql, new Object[]{board.getId()});
+        this.jdbcTemplate.update(sql, board.getId());
     }
 }

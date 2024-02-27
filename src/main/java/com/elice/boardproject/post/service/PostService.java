@@ -35,23 +35,19 @@ public class PostService {
     }
 
     public Post findPost(Long postId) {
-        return (Post)this.postRepository.findById(postId).orElseThrow(() -> {
-            return new ServiceLogicException(ExceptionCode.POST_NOT_FOUND);
-        });
+        return this.postRepository.findById(postId).orElseThrow(() -> new ServiceLogicException(ExceptionCode.POST_NOT_FOUND));
     }
 
     public Post createPost(Post post, Long boardId) {
         Board boardToCreate = this.boardService.findBoardById(boardId);
         post.setBoard(boardToCreate);
-        Post savedPost = (Post)this.postRepository.save(post);
+        Post savedPost = this.postRepository.save(post);
         return savedPost;
     }
 
     public Post updatePost(Post post, Long postId) {
         post.setId(postId);
-        Post foundPost = (Post)this.postRepository.findById(post.getId()).orElseThrow(() -> {
-            return new ServiceLogicException(ExceptionCode.POST_NOT_FOUND);
-        });
+        Post foundPost = this.postRepository.findById(post.getId()).orElseThrow(() -> new ServiceLogicException(ExceptionCode.POST_NOT_FOUND));
         Optional.ofNullable(post.getTitle()).ifPresent((title) -> {
             foundPost.setTitle(title);
         });
@@ -64,13 +60,11 @@ public class PostService {
         Optional.ofNullable(post.getContent()).ifPresent((content) -> {
             foundPost.setContent(content);
         });
-        return (Post)this.postRepository.save(foundPost);
+        return this.postRepository.save(foundPost);
     }
 
     public void deletePost(Long id) {
-        Post foundPost = (Post)this.postRepository.findById(id).orElseThrow(() -> {
-            return new ServiceLogicException(ExceptionCode.POST_NOT_FOUND);
-        });
+        Post foundPost = this.postRepository.findById(id).orElseThrow(() -> new ServiceLogicException(ExceptionCode.POST_NOT_FOUND));
         this.postRepository.delete(foundPost);
     }
 }

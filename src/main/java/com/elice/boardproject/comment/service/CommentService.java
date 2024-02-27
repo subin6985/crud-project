@@ -28,9 +28,7 @@ public class CommentService {
     }
 
     public Comment findComment(Long commentId) {
-        return (Comment)this.commentRepository.findById(commentId).orElseThrow(() -> {
-            return new ServiceLogicException(ExceptionCode.COMMENT_NOT_FOUND);
-        });
+        return this.commentRepository.findById(commentId).orElseThrow(() -> new ServiceLogicException(ExceptionCode.COMMENT_NOT_FOUND));
     }
 
     public List<Comment> findCommentsByPostId(Long postId) {
@@ -38,28 +36,23 @@ public class CommentService {
     }
 
     public Comment createComment(Long postId, Comment comment) {
-        Post post = (Post)this.postRepository.findById(postId).orElseThrow(() -> {
-            return new ServiceLogicException(ExceptionCode.POST_NOT_FOUND);
-        });
+        Post post = this.postRepository.findById(postId).orElseThrow(() -> new ServiceLogicException(ExceptionCode.POST_NOT_FOUND));
         log.info(post.getTitle());
         comment.setPost(post);
-        return (Comment)this.commentRepository.save(comment);
+        return this.commentRepository.save(comment);
     }
 
     public Comment updateComment(Long commentId, Comment comment) {
-        Comment foundComment = (Comment)this.commentRepository.findById(comment.getId()).orElseThrow(() -> {
-            return new ServiceLogicException(ExceptionCode.COMMENT_NOT_FOUND);
-        });
+        comment.setId(commentId);
+        Comment foundComment = this.commentRepository.findById(comment.getId()).orElseThrow(() -> new ServiceLogicException(ExceptionCode.COMMENT_NOT_FOUND));
         Optional.ofNullable(comment.getContent()).ifPresent((content) -> {
             foundComment.setContent(content);
         });
-        return (Comment)this.commentRepository.save(foundComment);
+        return this.commentRepository.save(foundComment);
     }
 
     public void deleteComment(Long commentId) {
-        Comment foundComment = (Comment)this.commentRepository.findById(commentId).orElseThrow(() -> {
-            return new ServiceLogicException(ExceptionCode.COMMENT_NOT_FOUND);
-        });
+        Comment foundComment = this.commentRepository.findById(commentId).orElseThrow(() -> new ServiceLogicException(ExceptionCode.COMMENT_NOT_FOUND));
         this.commentRepository.delete(foundComment);
     }
 }

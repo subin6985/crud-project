@@ -31,7 +31,7 @@ public class ImageService {
     }
 
     public Image findImage(Long imageId) {
-        return (Image)this.imageRepository.findById(imageId).orElse(null);
+        return this.imageRepository.findById(imageId).orElseThrow(() -> new ServiceLogicException(ExceptionCode.IMAGE_NOT_FOUND));
     }
 
     public List<Image> findImagesByPostId(Long postId) {
@@ -39,28 +39,26 @@ public class ImageService {
     }
 
     public Image createImage(Long postId, Image image) {
-        Post post = (Post)this.postRepository.findById(postId).orElseThrow(() -> {
-            return new ServiceLogicException(ExceptionCode.POST_NOT_FOUND);
-        });
+        Post post = this.postRepository.findById(postId).orElseThrow(() -> new ServiceLogicException(ExceptionCode.POST_NOT_FOUND));
         log.info(post.getTitle());
         image.setPost(post);
-        return (Image)this.imageRepository.save(image);
+        return this.imageRepository.save(image);
     }
 
     public Image updateImage(Long imageId, Image image) {
         image.setId(imageId);
-        Image foundImage = (Image)this.imageRepository.findById(image.getId()).orElse(null);
+        Image foundImage = this.imageRepository.findById(image.getId()).orElseThrow(() -> new ServiceLogicException(ExceptionCode.IMAGE_NOT_FOUND));
         Optional.ofNullable(image.isThumbnail()).ifPresent((thumbnail) -> {
             foundImage.setThumbnail(thumbnail);
         });
         Optional.ofNullable(image.getImageUrl()).ifPresent((imageUrl) -> {
             foundImage.setImageUrl(imageUrl);
         });
-        return (Image)this.imageRepository.save(foundImage);
+        return this.imageRepository.save(foundImage);
     }
 
     public void deleteImage(Long imageId) {
-        Image foundImage = (Image)this.imageRepository.findById(imageId).orElse(null);
+        Image foundImage = this.imageRepository.findById(imageId).orElseThrow(() -> new ServiceLogicException(ExceptionCode.IMAGE_NOT_FOUND));
         this.imageRepository.delete(foundImage);
     }
 }

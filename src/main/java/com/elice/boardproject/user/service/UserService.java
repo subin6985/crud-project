@@ -28,16 +28,16 @@ public class UserService {
 
     public User findUser(String userId) {
         Long userIdAsLong = Long.parseLong(userId);
-        return (User)this.userRepository.findById(userIdAsLong).orElse(null);
+        return this.userRepository.findById(userIdAsLong).orElseThrow(() -> new ServiceLogicException(ExceptionCode.USER_NOT_FOUND));
     }
 
     public User createUser(User user) {
-        return (User)this.userRepository.save(user);
+        return this.userRepository.save(user);
     }
 
     public User updateUser(String userId, User user) {
         user.setId(userId);
-        User foundUser = (User)this.userRepository.findById(Long.parseLong(user.getId())).orElse(null);
+        User foundUser = this.userRepository.findById(Long.parseLong(user.getId())).orElseThrow(() -> new ServiceLogicException(ExceptionCode.USER_NOT_FOUND));
         Optional.ofNullable(user.getId()).ifPresent((id) -> {
             foundUser.setId(id);
         });
@@ -53,11 +53,11 @@ public class UserService {
         Optional.ofNullable(user.getProfileImg()).ifPresent((profileImg) -> {
             foundUser.setProfileImg(profileImg);
         });
-        return (User)this.userRepository.save(foundUser);
+        return this.userRepository.save(foundUser);
     }
 
     public void deleteUser(String userId) {
-        User foundUser = (User)this.userRepository.findById(Long.parseLong(userId)).orElse(null);
+        User foundUser = this.userRepository.findById(Long.parseLong(userId)).orElseThrow(() -> new ServiceLogicException(ExceptionCode.USER_NOT_FOUND));
         foundUser.setStatus(false);
         this.userRepository.delete(foundUser);
     }

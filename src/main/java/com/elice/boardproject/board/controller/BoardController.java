@@ -37,7 +37,7 @@ public class BoardController {
     }
 
     // 내가 작성한 글 목록
-    @GetMapping({"/{boardId}/1"})
+    /*@GetMapping({"/{boardId}/1"})
     public String getBoardByUser(@PathVariable Long boardId, @RequestParam String userId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, Model model) {
         Board board = this.boardService.findBoardById(boardId);
         PageRequest pageRequest = PageRequest.of(page, size);
@@ -46,10 +46,10 @@ public class BoardController {
         model.addAttribute("userId", userId);
         model.addAttribute("postPage", postPage);
         return "board/board";
-    }
+    }*/
 
     // 전체 글 목록
-    @GetMapping({"/{boardId}/2"})
+    @GetMapping({"/{boardId}"})
     public String getBoard(@PathVariable Long boardId, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(required = false) String keyword, Model model) {
         Board board = this.boardService.findBoardById(boardId);
         PageRequest pageRequest = PageRequest.of(page, size);
