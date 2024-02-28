@@ -44,6 +44,16 @@
           />
         </div>
         <div class="mb-3">
+          <label for="hall">공연장</label>
+          <textarea
+                  class="form-control"
+                  id="hall"
+                  name="hall"
+                  placeholder="공연장 입력"
+                  th:text="${post.hall}"
+          ></textarea>
+        </div>
+        <div class="mb-3">
           <label for="seat">좌석</label>
           <textarea
                   class="form-control"

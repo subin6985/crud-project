@@ -47,10 +47,17 @@
       >
       <div class="container border rounded p-4 position-relative">
         <div class="header mb-3">
-          <h2 class="text-start" th:text="${post.title}">게시글 제목</h2>
+          <h2 class="text-start" th:utext="${'<strong>' + post.title + '</strong>'}">게시글 제목</h2>
+          <div th:if = "${post.user != null}">
+            <p class="m-0" th:utext="${'<strong>' + post.user.nickname + '</strong>'}">작성자</p>
+          </div>
+          <div th:if = "${post.user == null}">
+            <p class="m-0"><b>익명의 작성자</b></p>
+          </div>
         </div>
         <div class="header mb-3">
-          <p class="m-0" th:text="${post.seat}">좌석</p>
+          <p class="m-0" th:text="'공연장: ' + ${post.hall}">공연장</p>
+          <p class="m-0" th:text="'좌석: ' + ${post.seat}">좌석</p>
           <p class="m-0" th:text="'별점: ' + ${post.score}">별점</p>
         </div>
         <p class="m-0" th:text="${post.content}">게시글 내용</p>
@@ -74,6 +81,12 @@
             th:each="comment : ${comments}"
           >
             <div class="card-body position-relative">
+              <div class="mb-3" th:if = "${comment.user != null}">
+                <p class="m-0" th:utext="${'<strong>' + comment.user.nickname + '</strong>'}">작성자</p>
+              </div>
+              <div class="mb-3" th:if = "${comment.user == null}">
+                <p class="m-0"><b>익명의 작성자</b></p>
+              </div>
               <p class="mb-2" th:text="${comment.content}">댓글 내용</p>
               <small class="text-secondary">2024-01-04T13:21:21</small>
 

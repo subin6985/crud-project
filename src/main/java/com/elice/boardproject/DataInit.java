@@ -32,12 +32,14 @@ public class DataInit {
         Board board = (Board)this.boardRepository.findById(1L).orElseThrow(() -> {
             return new RuntimeException();
         });
-        User user1 = new User("elice", "1234", "엘리스", "email@elice.com", "src/main/resources/static/hellobit.png");
+        User user1 = new User("elice", "1234", "엘리스", "email1@elice.com", "src/main/resources/static/hellobit.png");
         this.userRepository.save(user1);
-        this.postRepository.save(new Post(board, user1, "240108 마리 퀴리", "2층 B구역 2열 중앙", 5, "재밌었다. 라듐 조심!"));
+        User user2 = new User("rabbit", "3456", "토끼", "email2@elice.com");
+        this.userRepository.save(user2);
+        this.postRepository.save(new Post(board, user1, "240108 마리 퀴리", "홍익대학교 대학로 아트센터", "2층 B구역 2열 중앙", 4, "재밌었다. 라듐 조심!"));
         Post post = (Post)this.postRepository.findById(1L).orElseThrow(() -> {
             return new RuntimeException();
         });
-        this.commentRepository.save(new Comment(post, user1, "우와 재밌었겠어요~"));
+        this.commentRepository.save(new Comment(post, user2, "우와 재밌었겠어요~"));
     }
 }

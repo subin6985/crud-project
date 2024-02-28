@@ -43,6 +43,13 @@ public class User {
     )
     private boolean status = true;
 
+    public User(String id, String password, String nickname, String email) {
+        this.id = id;
+        this.password = password;
+        this.nickname = nickname;
+        this.email = email;
+    }
+
     public User(String id, String password, String nickname, String email, String profileImg) {
         this.id = id;
         this.password = password;
