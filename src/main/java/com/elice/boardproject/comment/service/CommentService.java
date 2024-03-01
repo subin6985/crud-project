@@ -55,4 +55,11 @@ public class CommentService {
         Comment foundComment = this.commentRepository.findById(commentId).orElseThrow(() -> new ServiceLogicException(ExceptionCode.COMMENT_NOT_FOUND));
         this.commentRepository.delete(foundComment);
     }
+
+    public void deleteCommentByPostId(Long postId) {
+        List<Comment> comments = this.commentRepository.findByPostId(postId);
+        for(Comment comment: comments) {
+            this.commentRepository.delete(comment);
+        }
+    }
 }

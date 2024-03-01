@@ -1,11 +1,15 @@
 package com.elice.boardproject.board.repository;
 
 import com.elice.boardproject.board.entity.Board;
+import com.elice.boardproject.post.entity.Post;
+import com.elice.boardproject.post.repository.PostRepository;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
+import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -13,13 +17,11 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+@AllArgsConstructor
 @Repository
 public class BoardRepository {
     private final JdbcTemplate jdbcTemplate;
-
-    public BoardRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    private final PostRepository postRepository;
 
     private RowMapper<Board> boardRowMapper() {
         return (resultSet, rowNum) -> {

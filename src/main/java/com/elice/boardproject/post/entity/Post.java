@@ -50,14 +50,14 @@ public class Post extends BaseEntity {
     )
     private String seat;
     @Column(nullable = false)
-    private int score;
+    private String score;
     @Column(
             nullable = false,
             columnDefinition = "TEXT"
     )
     private String content;
 
-    public Post(Board board, String title, String hall, String seat, int score, String content) {
+    public Post(Board board, String title, String hall, String seat, String score, String content) {
         this.board = board;
         this.title = title;
         this.hall = hall;
@@ -66,7 +66,7 @@ public class Post extends BaseEntity {
         this.content = content;
     }
 
-    public Post(Board board, User user, String title, String hall, String seat, int score, String content) {
+    public Post(Board board, User user, String title, String hall, String seat, String score, String content) {
         this.board = board;
         this.user = user;
         this.title = title;

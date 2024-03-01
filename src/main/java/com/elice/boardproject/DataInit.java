@@ -36,7 +36,7 @@ public class DataInit {
         this.userRepository.save(user1);
         User user2 = new User("rabbit", "3456", "토끼", "email2@elice.com");
         this.userRepository.save(user2);
-        this.postRepository.save(new Post(board, user1, "240108 마리 퀴리", "홍익대학교 대학로 아트센터", "2층 B구역 2열 중앙", 4, "재밌었다. 라듐 조심!"));
+        this.postRepository.save(new Post(board, user1, "240108 마리 퀴리", "홍익대학교 대학로 아트센터", "2층 B구역 2열 중앙", "4", "재밌었다. 라듐 조심!"));
         Post post = (Post)this.postRepository.findById(1L).orElseThrow(() -> {
             return new RuntimeException();
         });

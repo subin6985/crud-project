@@ -2,6 +2,7 @@ package com.elice.boardproject.post.service;
 
 import com.elice.boardproject.board.entity.Board;
 import com.elice.boardproject.board.service.BoardService;
+import com.elice.boardproject.comment.service.CommentService;
 import com.elice.boardproject.global.exception.ExceptionCode;
 import com.elice.boardproject.global.exception.ServiceLogicException;
 import com.elice.boardproject.post.entity.Post;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
+    private final CommentService commentService;
     private final BoardService boardService;
 
     public Page<Post> findPostsByBoardAndKeyword(Board board, String keyword, PageRequest pageRequest) {
@@ -65,6 +67,7 @@ public class PostService {
 
     public void deletePost(Long id) {
         Post foundPost = this.postRepository.findById(id).orElseThrow(() -> new ServiceLogicException(ExceptionCode.POST_NOT_FOUND));
+        this.commentService.deleteCommentByPostId(foundPost.getId());
         this.postRepository.delete(foundPost);
     }
 }

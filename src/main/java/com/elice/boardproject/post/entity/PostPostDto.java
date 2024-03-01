@@ -15,6 +15,6 @@ public class PostPostDto {
     private String title;
     private String hall;
     private String seat;
-    private int score;
+    private String score;
     private String content;
 }

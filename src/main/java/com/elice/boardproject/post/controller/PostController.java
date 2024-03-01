@@ -46,10 +46,24 @@ public class PostController {
     }
 
     @PostMapping({"/create"})
-    public String createPostPost(@ModelAttribute PostPostDto postPostDto, @RequestParam Long boardId) {
-        Post post = this.postMapper.postPostDTOToPost(postPostDto);
-        Post createdPost = this.postService.createPost(post, boardId);
-        return "redirect:/boards/" + createdPost.getBoard().getId();
+    public String createPostPost(@ModelAttribute PostPostDto postPostDto, @RequestParam Long boardId, RedirectAttributes redirectAttributes) {
+        try {
+            // score가 정수로 입력 됐는지 검증
+            int score = Integer.parseInt(postPostDto.getScore());
+
+            // score의 범위 검증
+            if(score >= 1 && score <= 5) {
+                Post post = this.postMapper.postPostDTOToPost(postPostDto);
+                Post createdPost = this.postService.createPost(post, boardId);
+                return "redirect:/boards/" + createdPost.getBoard().getId();
+            } else {
+                redirectAttributes.addFlashAttribute("error", "평점은 1에서 5까지의 정수로 입력해주세요.");
+                return "redirect:/posts/create?boardId=" + boardId;
+            }
+        } catch (NumberFormatException e) { // score가 정수가 아닌 경우 예외 처리
+            redirectAttributes.addFlashAttribute("error", "평점은 정수로 입력해주세요.");
+            return "redirect:/posts/create?boardId=" + boardId;
+        }
     }
 
     @GetMapping({"/{postId}/edit"})

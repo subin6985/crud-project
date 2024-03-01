@@ -60,10 +60,14 @@
         <div class="mb-3">
           <label for="score">평점</label>
           <textarea
+                  type="number"
                   class="form-control"
                   id="score"
                   name="score"
                   placeholder="평점 입력 (1~5)"
+                  min="1"
+                  max="5"
+                  required
           ></textarea>
         </div>
         <div class="mb-3">
