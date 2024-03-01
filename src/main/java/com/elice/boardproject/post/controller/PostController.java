@@ -75,11 +75,23 @@ public class PostController {
 
     @PostMapping({"/{postId}/edit"})
     public String editPost(@PathVariable Long postId, @ModelAttribute PostPostDto postPostDto, RedirectAttributes redirectAttributes) {
-        Post post = this.postMapper.postPostDTOToPost(postPostDto);
-        Post updatedPost = this.postService.updatePost(post, postId);
-        redirectAttributes.addAttribute("postId", updatedPost.getId());
-        redirectAttributes.addFlashAttribute("message", "게시글이 수정되었습니다.");
-        return "redirect:/posts/{postId}";
+        try{
+            int score = Integer.parseInt(postPostDto.getScore());
+
+            if(score >= 1 && score <= 5) {
+                Post post = this.postMapper.postPostDTOToPost(postPostDto);
+                Post updatedPost = this.postService.updatePost(post, postId);
+                redirectAttributes.addAttribute("postId", updatedPost.getId());
+                redirectAttributes.addFlashAttribute("message", "게시글이 수정되었습니다.");
+                return "redirect:/posts/{postId}";
+            } else {
+                redirectAttributes.addFlashAttribute("error", "평점은 1에서 5까지의 정수로 입력해주세요.");
+                return "redirect:/posts/" + postId + "/edit";
+            }
+        } catch (NumberFormatException e) {
+            redirectAttributes.addFlashAttribute("error", "평점은 정수로 입력해주세요.");
+            return "redirect:/posts/" + postId + "/edit";
+        }
     }
 
     @DeleteMapping({"/{postId}"})
